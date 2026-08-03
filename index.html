@@ -490,6 +490,28 @@
       line-height: 1.4;
     }
 
+    .btn-icon {
+      background: #f3e8ff;
+      border: none;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .btn-icon:active {
+      transform: scale(0.92);
+    }
+
+    .btn-icon.danger {
+      background: #fee2e2;
+    }
+
     /* Pending confirm */
     .pending-item {
       background: #fff7ed;
@@ -878,6 +900,22 @@
     </div>
   </div>
 
+  <!-- Modal Edit Desire -->
+  <div class="modal-overlay" id="modal-edit">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <h3>Editar Desejo</h3>
+      <p class="sub">Só é possível editar desejos ainda não revelados</p>
+      <textarea id="edit-desire-text" placeholder="Texto do desejo..." maxlength="300"></textarea>
+      <div class="char-count"><span id="edit-char-count">0</span>/300</div>
+      <input type="hidden" id="edit-desire-id" />
+      <div class="flex-gap">
+        <button class="btn btn-ghost" onclick="closeModal('modal-edit')">Cancelar</button>
+        <button class="btn btn-primary" onclick="updateDesire()">Salvar alterações</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast -->
   <div class="toast" id="toast"></div>
 
@@ -980,6 +1018,7 @@
         if (!game.players) game.players = { tayna: { score: 0 }, guilherme: { score: 0 } };
         if (!game.desires) game.desires = [];
         if (!game.active) game.active = { tayna: null, guilherme: null };
+        if (!game.resetRequest) game.resetRequest = null;
 
         // Check deadlines for both players (active or pending_confirm)
         let changed = false;
@@ -1118,13 +1157,23 @@
 
       // Written by me
       const myWritten = game.desires.filter(d => d.writer === me);
-      const completedByMe = game.desires.filter(d =>
-        d.writer === other && (d.status === 'completed' || d.status === 'failed') &&
-        (d.confirmedBy === me || d.failedAt)
-      ); // roughly
 
       let html = '';
 
+      // Reset request banner
+      if (game.resetRequest && game.resetRequest.from !== me) {
+        html += `
+          <div class="card animate-in" style="background:#fef3c7;border:2px solid #f59e0b;margin-bottom:16px">
+            <div style="font-weight:800;color:#92400e;margin-bottom:6px">⚠️ Solicitação de reset</div>
+            <p style="font-size:0.9rem;color:#92400e;margin-bottom:12px">
+              ${CREDENTIALS[game.resetRequest.from].name} pediu para resetar o jogo.
+            </p>
+            <button class="btn btn-primary" style="background:linear-gradient(135deg,#f59e0b,#d97706)" onclick="switchView('write')">
+              Ver e responder
+            </button>
+          </div>
+        `;
+      }
       // Winner check (if all done)
       const allMyDesiresDone = availableFromOther.length === 0 && !myActive;
       const totalFromOther = game.desires.filter(d => d.writer === other).length;
@@ -1276,7 +1325,7 @@
 
       if (count < MAX_DESIRES) {
         html += `
-          <button class="btn btn-primary" style="margin-bottom:16px" onclick="openModal('modal-add')">
+          <button class="btn btn-primary" style="margin-bottom:16px" onclick="openAddModal()">
             + Adicionar desejo
           </button>
         `;
@@ -1303,12 +1352,19 @@
           else if (d.status === 'completed') statusBadge = '<span class="badge badge-success">Cumprido</span>';
           else if (d.status === 'failed') statusBadge = '<span class="badge badge-danger">Não cumprido</span>';
 
+          const canEdit = d.status === 'available';
           html += `
             <div class="desire-item">
               <div class="num">${myWritten.length - i}</div>
               <div class="text">
                 ${escapeHtml(d.text)}
-                <div style="margin-top:6px">${statusBadge}</div>
+                <div style="margin-top:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                  ${statusBadge}
+                  ${canEdit ? `
+                    <button class="btn-icon" onclick="openEditModal('${d.id}')" title="Editar">✏️</button>
+                    <button class="btn-icon danger" onclick="deleteDesire('${d.id}')" title="Excluir">🗑️</button>
+                  ` : ''}
+                </div>
               </div>
             </div>
           `;
@@ -1316,7 +1372,57 @@
         html += `</div>`;
       }
 
+      // Reset section
+      html += renderResetSection();
+
       container.innerHTML = html;
+    }
+
+    function renderResetSection() {
+      const req = game.resetRequest;
+      let html = `
+        <div class="card" style="margin-top:20px;border:2px dashed #fca5a5;background:#fef2f2">
+          <div class="card-title" style="color:#991b1b">🔄 Resetar jogo</div>
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:14px;line-height:1.45">
+            Apaga <strong>todos</strong> os desejos, pontuações e progresso. Só acontece se <strong>os dois</strong> concordarem.
+          </p>
+      `;
+
+      if (!req) {
+        html += `
+          <button class="btn btn-danger" onclick="requestReset()">
+            Solicitar reset do jogo
+          </button>
+        `;
+      } else if (req.from === currentUser) {
+        html += `
+          <div style="background:#fff7ed;border-radius:12px;padding:14px;margin-bottom:12px">
+            <div style="font-weight:700;color:#c2410c;margin-bottom:4px">Aguardando o outro...</div>
+            <div style="font-size:0.85rem;color:var(--text-muted)">
+              Você solicitou o reset. ${CREDENTIALS[otherUser(currentUser)].name} precisa confirmar.
+            </div>
+          </div>
+          <button class="btn btn-ghost" onclick="cancelReset()">Cancelar minha solicitação</button>
+        `;
+      } else {
+        html += `
+          <div style="background:#fef3c7;border-radius:12px;padding:14px;margin-bottom:12px">
+            <div style="font-weight:700;color:#92400e;margin-bottom:4px">
+              ${CREDENTIALS[req.from].name} pediu para resetar o jogo
+            </div>
+            <div style="font-size:0.85rem;color:var(--text-muted)">
+              Solicitado em ${formatDate(req.at)}
+            </div>
+          </div>
+          <div class="flex-gap">
+            <button class="btn btn-ghost" onclick="rejectReset()">Recusar</button>
+            <button class="btn btn-danger" onclick="confirmReset()">Confirmar reset</button>
+          </div>
+        `;
+      }
+
+      html += `</div>`;
+      return html;
     }
 
     // ----- PENDING -----
@@ -1436,21 +1542,39 @@
 
     function openModal(id) {
       $(id).classList.add('show');
-      if (id === 'modal-add') {
-        $('new-desire-text').value = '';
-        $('char-count').textContent = '0';
-        setTimeout(() => $('new-desire-text').focus(), 300);
-      }
     }
 
     function closeModal(id) {
       $(id).classList.remove('show');
     }
 
+    function openAddModal() {
+      $('new-desire-text').value = '';
+      $('char-count').textContent = '0';
+      openModal('modal-add');
+      setTimeout(() => $('new-desire-text').focus(), 300);
+    }
+
+    function openEditModal(desireId) {
+      const desire = game.desires.find(d => d.id === desireId);
+      if (!desire || desire.status !== 'available') {
+        toast('Só é possível editar desejos disponíveis', 'error');
+        return;
+      }
+      $('edit-desire-id').value = desireId;
+      $('edit-desire-text').value = desire.text;
+      $('edit-char-count').textContent = desire.text.length;
+      openModal('modal-edit');
+      setTimeout(() => $('edit-desire-text').focus(), 300);
+    }
+
     // Char count
     document.addEventListener('input', (e) => {
       if (e.target.id === 'new-desire-text') {
         $('char-count').textContent = e.target.value.length;
+      }
+      if (e.target.id === 'edit-desire-text') {
+        $('edit-char-count').textContent = e.target.value.length;
       }
     });
 
@@ -1491,6 +1615,128 @@
         renderView();
       } catch (e) {
         toast('Erro ao salvar', 'error');
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    async function updateDesire() {
+      const id = $('edit-desire-id').value;
+      const text = $('edit-desire-text').value.trim();
+      if (!text || text.length < 5) {
+        toast('Desejo muito curto', 'error');
+        return;
+      }
+
+      const desire = game.desires.find(d => d.id === id);
+      if (!desire || desire.status !== 'available' || desire.writer !== currentUser) {
+        toast('Não é possível editar este desejo', 'error');
+        return;
+      }
+
+      showLoading(true);
+      try {
+        desire.text = text;
+        game = await saveGame(game);
+        closeModal('modal-edit');
+        toast('Desejo atualizado! ✏️', 'success');
+        renderView();
+      } catch (e) {
+        toast('Erro ao atualizar', 'error');
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    async function deleteDesire(desireId) {
+      const desire = game.desires.find(d => d.id === desireId);
+      if (!desire || desire.status !== 'available' || desire.writer !== currentUser) {
+        toast('Só é possível excluir desejos disponíveis', 'error');
+        return;
+      }
+
+      if (!confirm('Tem certeza que deseja excluir este desejo?')) return;
+
+      showLoading(true);
+      try {
+        game.desires = game.desires.filter(d => d.id !== desireId);
+        game = await saveGame(game);
+        toast('Desejo excluído', 'success');
+        renderView();
+      } catch (e) {
+        toast('Erro ao excluir', 'error');
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    // ========== RESET CONSENSUAL ==========
+    async function requestReset() {
+      if (!confirm('Solicitar o reset do jogo? O outro jogador precisará confirmar.')) return;
+
+      showLoading(true);
+      try {
+        game.resetRequest = {
+          from: currentUser,
+          at: Date.now()
+        };
+        game = await saveGame(game);
+        toast('Solicitação enviada. Aguardando o outro jogador.', 'success');
+        renderView();
+      } catch (e) {
+        toast('Erro ao solicitar reset', 'error');
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    async function cancelReset() {
+      showLoading(true);
+      try {
+        game.resetRequest = null;
+        game = await saveGame(game);
+        toast('Solicitação cancelada');
+        renderView();
+      } catch (e) {
+        toast('Erro', 'error');
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    async function rejectReset() {
+      showLoading(true);
+      try {
+        game.resetRequest = null;
+        game = await saveGame(game);
+        toast('Reset recusado');
+        renderView();
+      } catch (e) {
+        toast('Erro', 'error');
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    async function confirmReset() {
+      if (!confirm('CONFIRMAR RESET?\n\nIsso apagará TODOS os desejos, pontuações e progresso permanentemente.')) return;
+
+      showLoading(true);
+      try {
+        game.players = {
+          tayna: { score: 0 },
+          guilherme: { score: 0 }
+        };
+        game.desires = [];
+        game.active = { tayna: null, guilherme: null };
+        game.resetRequest = null;
+        game = await saveGame(game);
+        toast('Jogo resetado com sucesso! 🔄', 'success');
+        updateScoreboard();
+        renderView();
+        switchView('home');
+      } catch (e) {
+        toast('Erro ao resetar', 'error');
       } finally {
         showLoading(false);
       }
