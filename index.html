@@ -4,27 +4,31 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="theme-color" content="#7c3aed" />
-  <title>Desejos – Tayna & Guilherme</title>
+  <meta name="theme-color" content="#0a0a1a" />
+  <title>DESEJOS // Tayna & Guilherme</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #7c3aed;
-      --primary-dark: #5b21b6;
+      --primary: #a855f7;
+      --primary-glow: rgba(168, 85, 247, 0.5);
       --secondary: #ec4899;
-      --accent: #14b8a6;
-      --success: #10b981;
-      --danger: #ef4444;
-      --warning: #f59e0b;
-      --bg: #faf5ff;
-      --card: #ffffff;
-      --text: #1e1b4b;
-      --text-muted: #6b7280;
-      --border: #e9d5ff;
-      --shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.15);
-      --radius: 20px;
+      --secondary-glow: rgba(236, 72, 153, 0.45);
+      --accent: #22d3ee;
+      --accent-glow: rgba(34, 211, 238, 0.4);
+      --success: #34d399;
+      --danger: #f43f5e;
+      --warning: #fbbf24;
+      --bg: #07070f;
+      --bg2: #0f0f1c;
+      --card: #12121f;
+      --card-border: rgba(168, 85, 247, 0.25);
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: rgba(148, 163, 184, 0.15);
+      --shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+      --radius: 16px;
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
 
@@ -37,7 +41,7 @@
 
     html, body {
       height: 100%;
-      font-family: 'Nunito', system-ui, sans-serif;
+      font-family: 'Rajdhani', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
@@ -47,6 +51,10 @@
       display: flex;
       flex-direction: column;
       min-height: 100dvh;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 85, 247, 0.18), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(236, 72, 153, 0.1), transparent),
+        var(--bg);
     }
 
     /* ========== LOGIN ========== */
@@ -57,7 +65,10 @@
       align-items: center;
       justify-content: center;
       padding: 24px;
-      background: linear-gradient(160deg, #fdf4ff 0%, #f3e8ff 40%, #ede9fe 100%);
+      background:
+        radial-gradient(ellipse 100% 80% at 50% 0%, rgba(168, 85, 247, 0.2), transparent 60%),
+        radial-gradient(ellipse 80% 50% at 20% 100%, rgba(236, 72, 153, 0.12), transparent),
+        #07070f;
       position: relative;
       overflow: hidden;
     }
@@ -65,34 +76,34 @@
     #login-screen::before {
       content: '';
       position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(236,72,153,0.15) 0%, transparent 70%);
-      top: -80px;
-      right: -80px;
-      border-radius: 50%;
+      inset: 0;
+      background: 
+        linear-gradient(90deg, transparent 49%, rgba(34, 211, 238, 0.03) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(168, 85, 247, 0.03) 50%, transparent 51%);
+      background-size: 40px 40px;
+      pointer-events: none;
+      animation: gridPulse 8s ease-in-out infinite;
     }
 
-    #login-screen::after {
-      content: '';
-      position: absolute;
-      width: 250px;
-      height: 250px;
-      background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
-      bottom: -60px;
-      left: -60px;
-      border-radius: 50%;
+    @keyframes gridPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
     }
 
     .login-card {
-      background: var(--card);
-      border-radius: 28px;
+      background: rgba(18, 18, 31, 0.9);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
       padding: 36px 28px;
       width: 100%;
       max-width: 380px;
-      box-shadow: var(--shadow);
+      box-shadow: 
+        0 0 40px rgba(168, 85, 247, 0.2),
+        0 0 80px rgba(236, 72, 153, 0.08),
+        inset 0 1px 0 rgba(255,255,255,0.05);
       position: relative;
       z-index: 1;
+      backdrop-filter: blur(12px);
     }
 
     .logo {
@@ -101,24 +112,46 @@
     }
 
     .logo h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #a855f7, #ec4899, #22d3ee);
+      background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+      animation: gradientShift 4s ease infinite;
+      text-shadow: 0 0 30px var(--primary-glow);
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     .logo p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.85;
     }
 
     .hearts {
-      font-size: 1.6rem;
-      margin-bottom: 8px;
-      letter-spacing: 4px;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      letter-spacing: 6px;
+      filter: drop-shadow(0 0 8px var(--secondary-glow));
+      animation: floatHeart 2.5s ease-in-out infinite;
+    }
+
+    @keyframes floatHeart {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
     .form-group {
@@ -128,27 +161,35 @@
     .form-group label {
       display: block;
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       margin-bottom: 6px;
-      color: var(--text);
+      color: var(--accent);
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .form-group input {
       width: 100%;
       padding: 14px 16px;
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      font-size: 1rem;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      font-size: 1.05rem;
       font-family: inherit;
+      font-weight: 600;
       transition: border-color 0.2s, box-shadow 0.2s;
-      background: #faf5ff;
+      background: rgba(7, 7, 15, 0.7);
+      color: var(--text);
     }
 
     .form-group input:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
-      background: white;
+      box-shadow: 0 0 0 3px var(--primary-glow), 0 0 20px var(--primary-glow);
+      background: rgba(7, 7, 15, 0.9);
+    }
+
+    .form-group input::placeholder {
+      color: #475569;
     }
 
     .btn {
@@ -157,69 +198,96 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 16px;
+      padding: 15px;
       border: none;
-      border-radius: 16px;
-      font-family: inherit;
-      font-weight: 800;
-      font-size: 1.05rem;
+      border-radius: 12px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
       cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+      transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
       position: relative;
       overflow: hidden;
+      text-transform: uppercase;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform 0.5s;
     }
 
     .btn:active {
-      transform: scale(0.97);
+      transform: scale(0.96);
+    }
+
+    .btn:active::after {
+      transform: translateX(100%);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
       color: white;
-      box-shadow: 0 8px 20px -4px rgba(124, 58, 237, 0.45);
+      box-shadow: 0 0 20px var(--primary-glow), 0 4px 15px rgba(0,0,0,0.3);
     }
 
     .btn-primary:disabled {
-      opacity: 0.6;
+      opacity: 0.5;
       cursor: not-allowed;
       transform: none;
+      box-shadow: none;
     }
 
     .btn-secondary {
-      background: white;
+      background: transparent;
       color: var(--primary);
-      border: 2px solid var(--primary);
+      border: 1px solid var(--primary);
     }
 
     .btn-success {
-      background: linear-gradient(135deg, var(--success), #059669);
-      color: white;
-      box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, #059669, #34d399);
+      color: #022c22;
+      box-shadow: 0 0 20px rgba(52, 211, 153, 0.35);
     }
 
     .btn-danger {
-      background: linear-gradient(135deg, var(--danger), #dc2626);
+      background: linear-gradient(135deg, #e11d48, #f43f5e);
       color: white;
+      box-shadow: 0 0 18px rgba(244, 63, 94, 0.3);
     }
 
     .btn-accent {
-      background: linear-gradient(135deg, var(--accent), #0d9488);
-      color: white;
-      box-shadow: 0 8px 20px -4px rgba(20, 184, 166, 0.4);
+      background: linear-gradient(135deg, #0891b2, #22d3ee);
+      color: #083344;
+      box-shadow: 0 0 20px var(--accent-glow);
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px var(--accent-glow); }
+      50% { box-shadow: 0 0 28px var(--accent-glow), 0 0 40px rgba(34, 211, 238, 0.2); }
     }
 
     .btn-ghost {
       background: transparent;
       color: var(--text-muted);
-      border: 2px solid var(--border);
+      border: 1px solid var(--border);
+      font-family: 'Rajdhani', sans-serif;
+      letter-spacing: 0.5px;
     }
 
     .error-msg {
       color: var(--danger);
       font-size: 0.9rem;
+      font-weight: 600;
       text-align: center;
       margin-top: 12px;
       min-height: 22px;
+      text-shadow: 0 0 10px rgba(244, 63, 94, 0.4);
     }
 
     /* ========== APP SHELL ========== */
@@ -227,18 +295,19 @@
       display: none;
       flex-direction: column;
       min-height: 100dvh;
-      padding-bottom: calc(70px + var(--safe-bottom));
+      padding-bottom: calc(72px + var(--safe-bottom));
     }
 
     .header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      background: linear-gradient(180deg, rgba(18,18,31,0.98), rgba(12,12,22,0.95));
       color: white;
-      padding: 16px 20px 20px;
-      border-radius: 0 0 28px 28px;
+      padding: 14px 16px 18px;
+      border-bottom: 1px solid var(--card-border);
       position: sticky;
       top: 0;
       z-index: 50;
-      box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4), 0 0 40px rgba(168, 85, 247, 0.08);
+      backdrop-filter: blur(16px);
     }
 
     .header-top {
@@ -257,40 +326,50 @@
     .avatar {
       width: 42px;
       height: 42px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.25);
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: 'Orbitron', sans-serif;
       font-weight: 800;
       font-size: 1.1rem;
-      border: 2px solid rgba(255,255,255,0.5);
+      border: 2px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 15px var(--primary-glow);
     }
 
     .header-user strong {
-      font-size: 1.1rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 1px;
     }
 
     .logout-btn {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: var(--danger);
       width: 40px;
       height: 40px;
-      border-radius: 12px;
-      font-size: 1.2rem;
+      border-radius: 10px;
+      font-size: 1.15rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: 0.2s;
+    }
+
+    .logout-btn:active {
+      background: rgba(244, 63, 94, 0.3);
+      transform: scale(0.92);
     }
 
     .scoreboard {
       display: flex;
-      background: rgba(255,255,255,0.18);
-      border-radius: 16px;
-      padding: 12px 8px;
-      backdrop-filter: blur(8px);
+      background: rgba(7, 7, 15, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 12px 6px;
     }
 
     .score-item {
@@ -303,34 +382,43 @@
       content: '';
       position: absolute;
       right: 0;
-      top: 15%;
-      height: 70%;
+      top: 10%;
+      height: 80%;
       width: 1px;
-      background: rgba(255,255,255,0.3);
+      background: linear-gradient(to bottom, transparent, var(--primary), transparent);
     }
 
     .score-label {
-      font-size: 0.75rem;
-      opacity: 0.85;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
       margin-bottom: 2px;
     }
 
     .score-value {
-      font-size: 1.6rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.7rem;
       font-weight: 800;
       line-height: 1.1;
+      background: linear-gradient(180deg, #fff, #a855f7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .score-diff {
       font-size: 0.7rem;
-      opacity: 0.8;
+      font-weight: 600;
+      color: var(--accent);
       margin-top: 2px;
     }
 
     /* ========== CONTENT ========== */
     .content {
       flex: 1;
-      padding: 20px 16px;
+      padding: 18px 14px;
       max-width: 480px;
       margin: 0 auto;
       width: 100%;
@@ -339,92 +427,140 @@
     .card {
       background: var(--card);
       border-radius: var(--radius);
-      padding: 20px;
-      margin-bottom: 16px;
+      padding: 18px;
+      margin-bottom: 14px;
       box-shadow: var(--shadow);
-      border: 1px solid rgba(233, 213, 255, 0.6);
+      border: 1px solid var(--card-border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), transparent);
     }
 
     .card-title {
-      font-weight: 800;
-      font-size: 1.05rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
       margin-bottom: 12px;
       display: flex;
       align-items: center;
       gap: 8px;
+      text-transform: uppercase;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-size: 0.7rem;
       font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-family: 'Orbitron', sans-serif;
     }
 
-    .badge-success { background: #d1fae5; color: #065f46; }
-    .badge-warning { background: #fef3c7; color: #92400e; }
-    .badge-danger { background: #fee2e2; color: #991b1b; }
-    .badge-info { background: #e0e7ff; color: #3730a3; }
-    .badge-pink { background: #fce7f3; color: #9d174d; }
+    .badge-success { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
+    .badge-warning { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-danger { background: rgba(244, 63, 94, 0.12); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.3); }
+    .badge-info { background: rgba(34, 211, 238, 0.12); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.3); }
+    .badge-pink { background: rgba(236, 72, 153, 0.12); color: #ec4899; border: 1px solid rgba(236, 72, 153, 0.3); }
 
     /* Active desire */
     .active-card {
-      background: linear-gradient(145deg, #fdf4ff, #f5f3ff);
-      border: 2px solid var(--primary);
-      position: relative;
-      overflow: hidden;
+      background: linear-gradient(160deg, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0.08));
+      border: 1px solid rgba(168, 85, 247, 0.45);
+      box-shadow: 0 0 30px rgba(168, 85, 247, 0.15), inset 0 0 40px rgba(168, 85, 247, 0.05);
+      animation: activePulse 3s ease-in-out infinite;
+    }
+
+    @keyframes activePulse {
+      0%, 100% { box-shadow: 0 0 25px rgba(168, 85, 247, 0.12), inset 0 0 30px rgba(168, 85, 247, 0.04); }
+      50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.25), inset 0 0 50px rgba(168, 85, 247, 0.08); }
     }
 
     .active-card::before {
-      content: '✨';
+      content: '⚡';
       position: absolute;
-      top: 12px;
+      top: 14px;
       right: 16px;
-      font-size: 1.4rem;
-      opacity: 0.5;
+      font-size: 1.3rem;
+      opacity: 0.6;
+      animation: spark 1.5s ease-in-out infinite;
+    }
+
+    @keyframes spark {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.15); }
     }
 
     .desire-text {
       font-size: 1.15rem;
       font-weight: 600;
-      line-height: 1.45;
+      line-height: 1.5;
       margin: 12px 0 16px;
       color: var(--text);
+      text-shadow: 0 0 20px rgba(255,255,255,0.1);
     }
 
     .countdown {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: white;
-      border-radius: 12px;
+      background: rgba(7, 7, 15, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
       padding: 10px 14px;
       margin-bottom: 16px;
+      font-family: 'Orbitron', sans-serif;
       font-weight: 700;
-      color: var(--primary-dark);
+      font-size: 0.95rem;
+      color: var(--accent);
+      letter-spacing: 1px;
     }
 
     .countdown.urgent {
       color: var(--danger);
-      background: #fef2f2;
+      border-color: rgba(244, 63, 94, 0.4);
+      background: rgba(244, 63, 94, 0.1);
+      animation: urgentBlink 1s ease-in-out infinite;
+    }
+
+    @keyframes urgentBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
     }
 
     .countdown-icon {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
     }
 
     /* Empty state */
     .empty-state {
       text-align: center;
-      padding: 28px 16px;
+      padding: 28px 14px;
       color: var(--text-muted);
     }
 
     .empty-state .icon {
-      font-size: 2.8rem;
+      font-size: 2.6rem;
       margin-bottom: 12px;
+      filter: drop-shadow(0 0 12px var(--primary-glow));
+      animation: floatIcon 3s ease-in-out infinite;
+    }
+
+    @keyframes floatIcon {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
 
     .empty-state p {
@@ -435,18 +571,27 @@
 
     /* Progress */
     .progress-bar {
-      height: 10px;
-      background: #ede9fe;
-      border-radius: 10px;
+      height: 8px;
+      background: rgba(7, 7, 15, 0.8);
+      border-radius: 8px;
       overflow: hidden;
       margin: 8px 0 4px;
+      border: 1px solid var(--border);
     }
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      border-radius: 10px;
-      transition: width 0.4s ease;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+      background-size: 200% 100%;
+      border-radius: 8px;
+      transition: width 0.5s ease;
+      animation: progressShine 2.5s linear infinite;
+      box-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    @keyframes progressShine {
+      0% { background-position: 100% 0; }
+      100% { background-position: -100% 0; }
     }
 
     .progress-label {
@@ -473,14 +618,16 @@
     .desire-item .num {
       width: 28px;
       height: 28px;
-      border-radius: 50%;
-      background: #ede9fe;
+      border-radius: 8px;
+      background: rgba(168, 85, 247, 0.15);
       color: var(--primary);
+      border: 1px solid rgba(168, 85, 247, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      font-size: 0.8rem;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
       flex-shrink: 0;
     }
 
@@ -491,41 +638,52 @@
     }
 
     .btn-icon {
-      background: #f3e8ff;
-      border: none;
+      background: rgba(168, 85, 247, 0.12);
+      border: 1px solid rgba(168, 85, 247, 0.25);
       width: 34px;
       height: 34px;
-      border-radius: 10px;
-      font-size: 1rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.15s, background 0.15s;
+      transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
     }
 
     .btn-icon:active {
-      transform: scale(0.92);
+      transform: scale(0.9);
+      box-shadow: 0 0 12px var(--primary-glow);
     }
 
     .btn-icon.danger {
-      background: #fee2e2;
+      background: rgba(244, 63, 94, 0.12);
+      border-color: rgba(244, 63, 94, 0.3);
     }
 
     /* Pending confirm */
     .pending-item {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
-      border-radius: 16px;
+      background: rgba(251, 191, 36, 0.08);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      border-radius: 14px;
       padding: 16px;
       margin-bottom: 12px;
+      animation: pendingGlow 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pendingGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(251, 191, 36, 0.1); }
+      50% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.2); }
     }
 
     .pending-item .who {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: #c2410c;
+      color: var(--warning);
+      letter-spacing: 1px;
+      text-transform: uppercase;
       margin-bottom: 6px;
+      font-family: 'Orbitron', sans-serif;
     }
 
     .pending-actions {
@@ -537,7 +695,7 @@
     .pending-actions .btn {
       flex: 1;
       padding: 12px;
-      font-size: 0.95rem;
+      font-size: 0.85rem;
     }
 
     /* Bottom nav */
@@ -546,12 +704,13 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: white;
-      border-top: 1px solid var(--border);
+      background: rgba(12, 12, 22, 0.95);
+      border-top: 1px solid var(--card-border);
       display: flex;
-      padding: 8px 0 calc(8px + var(--safe-bottom));
+      padding: 6px 0 calc(8px + var(--safe-bottom));
       z-index: 100;
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+      box-shadow: 0 -8px 30px rgba(0,0,0,0.4);
+      backdrop-filter: blur(16px);
     }
 
     .nav-item {
@@ -559,31 +718,40 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      padding: 8px;
+      gap: 3px;
+      padding: 8px 4px;
       background: none;
       border: none;
       color: var(--text-muted);
-      font-family: inherit;
-      font-size: 0.7rem;
-      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
       cursor: pointer;
-      transition: color 0.2s;
+      transition: color 0.2s, text-shadow 0.2s;
+      text-transform: uppercase;
     }
 
     .nav-item.active {
-      color: var(--primary);
+      color: var(--accent);
+      text-shadow: 0 0 12px var(--accent-glow);
     }
 
     .nav-item .icon {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
+      transition: transform 0.2s;
+    }
+
+    .nav-item.active .icon {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 6px var(--accent-glow));
     }
 
     /* Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(30, 27, 75, 0.55);
+      background: rgba(7, 7, 15, 0.75);
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -591,6 +759,7 @@
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.25s, visibility 0.25s;
+      backdrop-filter: blur(6px);
     }
 
     .modal-overlay.show {
@@ -599,15 +768,18 @@
     }
 
     .modal {
-      background: white;
-      border-radius: 28px 28px 0 0;
-      padding: 24px 20px calc(24px + var(--safe-bottom));
+      background: linear-gradient(180deg, #16162a, #0f0f1c);
+      border: 1px solid var(--card-border);
+      border-bottom: none;
+      border-radius: 24px 24px 0 0;
+      padding: 20px 18px calc(24px + var(--safe-bottom));
       width: 100%;
       max-width: 480px;
       max-height: 85dvh;
       overflow-y: auto;
       transform: translateY(100%);
-      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+      box-shadow: 0 -10px 50px rgba(168, 85, 247, 0.15);
     }
 
     .modal-overlay.show .modal {
@@ -617,50 +789,58 @@
     .modal-handle {
       width: 40px;
       height: 4px;
-      background: #d1d5db;
+      background: rgba(168, 85, 247, 0.4);
       border-radius: 4px;
-      margin: 0 auto 18px;
+      margin: 0 auto 16px;
     }
 
     .modal h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      margin-bottom: 8px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
       text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .modal p.sub {
       text-align: center;
       color: var(--text-muted);
       font-size: 0.9rem;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     textarea {
       width: 100%;
       min-height: 120px;
       padding: 14px;
-      border: 2px solid var(--border);
-      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
       font-family: inherit;
       font-size: 1rem;
+      font-weight: 500;
       resize: vertical;
       margin-bottom: 16px;
-      background: #faf5ff;
+      background: rgba(7, 7, 15, 0.7);
+      color: var(--text);
     }
 
     textarea:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.15);
+      box-shadow: 0 0 0 3px var(--primary-glow);
     }
 
     .char-count {
       text-align: right;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
       margin-top: -10px;
       margin-bottom: 12px;
+      font-family: 'Orbitron', sans-serif;
     }
 
     /* Toast */
@@ -668,32 +848,44 @@
       position: fixed;
       top: 20px;
       left: 50%;
-      transform: translateX(-50%) translateY(-100px);
-      background: #1e1b4b;
+      transform: translateX(-50%) translateY(-120px);
+      background: linear-gradient(135deg, #1e1b4b, #12121f);
       color: white;
       padding: 14px 22px;
-      border-radius: 14px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       z-index: 300;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 20px var(--primary-glow);
+      transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
       max-width: 90%;
       text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.5px;
     }
 
     .toast.show {
       transform: translateX(-50%) translateY(0);
     }
 
-    .toast.success { background: var(--success); }
-    .toast.error { background: var(--danger); }
+    .toast.success {
+      background: linear-gradient(135deg, #064e3b, #022c22);
+      border-color: rgba(52, 211, 153, 0.4);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 25px rgba(52, 211, 153, 0.3);
+    }
+
+    .toast.error {
+      background: linear-gradient(135deg, #881337, #4c0519);
+      border-color: rgba(244, 63, 94, 0.4);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 25px rgba(244, 63, 94, 0.3);
+    }
 
     /* Loading */
     .loading-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(255,255,255,0.7);
+      background: rgba(7, 7, 15, 0.75);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -701,6 +893,7 @@
       opacity: 0;
       visibility: hidden;
       transition: 0.2s;
+      backdrop-filter: blur(4px);
     }
 
     .loading-overlay.show {
@@ -711,10 +904,11 @@
     .spinner {
       width: 48px;
       height: 48px;
-      border: 4px solid #ede9fe;
+      border: 3px solid rgba(168, 85, 247, 0.2);
       border-top-color: var(--primary);
       border-radius: 50%;
-      animation: spin 0.7s linear infinite;
+      animation: spin 0.6s linear infinite;
+      box-shadow: 0 0 20px var(--primary-glow);
     }
 
     @keyframes spin {
@@ -735,7 +929,7 @@
     .history-icon {
       width: 36px;
       height: 36px;
-      border-radius: 50%;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -743,8 +937,14 @@
       flex-shrink: 0;
     }
 
-    .history-icon.ok { background: #d1fae5; }
-    .history-icon.fail { background: #fee2e2; }
+    .history-icon.ok {
+      background: rgba(52, 211, 153, 0.15);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+    .history-icon.fail {
+      background: rgba(244, 63, 94, 0.15);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
 
     .history-content {
       flex: 1;
@@ -759,6 +959,7 @@
     .history-meta {
       font-size: 0.75rem;
       color: var(--text-muted);
+      font-family: 'Orbitron', sans-serif;
     }
 
     /* Section headers */
@@ -770,8 +971,11 @@
     }
 
     .section-header h2 {
-      font-size: 1.1rem;
-      font-weight: 800;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     /* Utils */
@@ -785,28 +989,50 @@
 
     /* Animations */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     .animate-in {
-      animation: fadeInUp 0.35s ease forwards;
+      animation: fadeInUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
 
     /* Winner banner */
     .winner-banner {
-      background: linear-gradient(135deg, #fef3c7, #fde68a);
-      border: 2px solid #f59e0b;
-      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(251, 191, 36, 0.15), rgba(245, 158, 11, 0.1));
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      border-radius: 14px;
       padding: 16px;
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 0 25px rgba(251, 191, 36, 0.15);
+      animation: winnerPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes winnerPulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.1); }
+      50% { box-shadow: 0 0 35px rgba(251, 191, 36, 0.25); }
     }
 
     .winner-banner .title {
+      font-family: 'Orbitron', sans-serif;
       font-weight: 800;
-      color: #92400e;
-      font-size: 1.1rem;
+      color: var(--warning);
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    /* Screen shake for important actions */
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-4px); }
+      40% { transform: translateX(4px); }
+      60% { transform: translateX(-3px); }
+      80% { transform: translateX(3px); }
+    }
+
+    .shake {
+      animation: shake 0.4s ease;
     }
   </style>
 </head>
@@ -815,9 +1041,9 @@
   <div id="login-screen">
     <div class="login-card animate-in">
       <div class="logo">
-        <div class="hearts">💜 ✨ 💜</div>
-        <h1>Desejos</h1>
-        <p>Tayna & Guilherme</p>
+        <div class="hearts">⚡ 💜 ⚡</div>
+        <h1>DESEJOS</h1>
+        <p>Tayna // Guilherme</p>
       </div>
       <div class="form-group">
         <label for="username">Login</label>
@@ -943,6 +1169,92 @@
     let game = null;
     let currentView = 'home';
     let countdownInterval = null;
+    let audioCtx = null;
+
+    // ========== AUDIO & HAPTICS ==========
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+    }
+
+    function playTone(freq, duration, type = 'square', volume = 0.08, slideTo = null) {
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        if (slideTo) {
+          osc.frequency.exponentialRampToValueAtTime(slideTo, audioCtx.currentTime + duration);
+        }
+        gain.gain.setValueAtTime(volume, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playSound(name) {
+      switch (name) {
+        case 'click':
+          playTone(800, 0.06, 'square', 0.06);
+          vibrate(8);
+          break;
+        case 'success':
+          playTone(523, 0.1, 'sine', 0.1);
+          setTimeout(() => playTone(659, 0.1, 'sine', 0.1), 80);
+          setTimeout(() => playTone(784, 0.18, 'sine', 0.12), 160);
+          vibrate([30, 40, 50]);
+          break;
+        case 'error':
+          playTone(200, 0.15, 'sawtooth', 0.08);
+          setTimeout(() => playTone(150, 0.2, 'sawtooth', 0.06), 100);
+          vibrate([60, 30, 60]);
+          break;
+        case 'reveal':
+          playTone(300, 0.08, 'square', 0.07, 600);
+          setTimeout(() => playTone(600, 0.12, 'square', 0.08, 900), 100);
+          setTimeout(() => playTone(900, 0.15, 'sine', 0.1), 220);
+          vibrate([20, 30, 40, 30, 60]);
+          break;
+        case 'confirm':
+          playTone(440, 0.08, 'triangle', 0.09);
+          setTimeout(() => playTone(554, 0.08, 'triangle', 0.09), 70);
+          setTimeout(() => playTone(659, 0.2, 'triangle', 0.1), 140);
+          vibrate([25, 20, 40]);
+          break;
+        case 'delete':
+          playTone(400, 0.08, 'sawtooth', 0.06, 150);
+          vibrate(40);
+          break;
+        case 'nav':
+          playTone(600, 0.04, 'sine', 0.04);
+          vibrate(5);
+          break;
+        case 'login':
+          playTone(350, 0.1, 'sine', 0.1, 700);
+          setTimeout(() => playTone(700, 0.15, 'sine', 0.1), 120);
+          vibrate([20, 30, 40]);
+          break;
+        case 'reset':
+          playTone(150, 0.3, 'sawtooth', 0.1);
+          setTimeout(() => playTone(100, 0.4, 'sawtooth', 0.08), 200);
+          vibrate([80, 50, 80, 50, 120]);
+          break;
+        default:
+          playTone(500, 0.05, 'square', 0.05);
+      }
+    }
+
+    function vibrate(pattern) {
+      if (navigator.vibrate) {
+        try { navigator.vibrate(pattern); } catch (e) {}
+      }
+    }
 
     // ========== UTILS ==========
     function $(id) { return document.getElementById(id); }
@@ -955,6 +1267,8 @@
       const el = $('toast');
       el.textContent = msg;
       el.className = 'toast show ' + type;
+      if (type === 'success') playSound('success');
+      else if (type === 'error') playSound('error');
       setTimeout(() => el.classList.remove('show'), 2800);
     }
 
@@ -1059,15 +1373,18 @@
       const user = $('username').value.trim().toLowerCase();
       const pass = $('password').value.trim();
       const errorEl = $('login-error');
+      initAudio();
 
       if (!CREDENTIALS[user] || CREDENTIALS[user].password !== pass) {
         errorEl.textContent = 'Login ou senha incorretos';
+        playSound('error');
         return;
       }
 
       currentUser = user;
       localStorage.setItem('desejos_user', user);
       errorEl.textContent = '';
+      playSound('login');
       startApp();
     }
 
@@ -1125,6 +1442,7 @@
 
     // ========== VIEWS ==========
     function switchView(view) {
+      if (view !== currentView) playSound('nav');
       currentView = view;
       document.querySelectorAll('.nav-item').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.view === view);
@@ -1163,12 +1481,12 @@
       // Reset request banner
       if (game.resetRequest && game.resetRequest.from !== me) {
         html += `
-          <div class="card animate-in" style="background:#fef3c7;border:2px solid #f59e0b;margin-bottom:16px">
-            <div style="font-weight:800;color:#92400e;margin-bottom:6px">⚠️ Solicitação de reset</div>
-            <p style="font-size:0.9rem;color:#92400e;margin-bottom:12px">
+          <div class="card animate-in" style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.4);margin-bottom:16px">
+            <div style="font-weight:800;color:var(--warning);margin-bottom:6px;font-family:Orbitron,sans-serif;letter-spacing:1px">⚠️ SOLICITAÇÃO DE RESET</div>
+            <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:12px">
               ${CREDENTIALS[game.resetRequest.from].name} pediu para resetar o jogo.
             </p>
-            <button class="btn btn-primary" style="background:linear-gradient(135deg,#f59e0b,#d97706)" onclick="switchView('write')">
+            <button class="btn btn-primary" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#1c1917" onclick="switchView('write')">
               Ver e responder
             </button>
           </div>
@@ -1181,9 +1499,9 @@
         const scoreMe = game.players[me]?.score || 0;
         const scoreOther = game.players[other]?.score || 0;
         if (scoreMe > scoreOther) {
-          html += `<div class="winner-banner animate-in"><div class="title">🏆 Você está vencendo!</div><div style="font-size:0.9rem;color:#92400e;margin-top:4px">Mais pontos no final</div></div>`;
+          html += `<div class="winner-banner animate-in"><div class="title">🏆 Você está vencendo!</div><div style="font-size:0.9rem;color:var(--text-muted);margin-top:4px">Mais pontos no final</div></div>`;
         } else if (scoreOther > scoreMe) {
-          html += `<div class="winner-banner animate-in"><div class="title">💪 Continue firme!</div><div style="font-size:0.9rem;color:#92400e;margin-top:4px">${CREDENTIALS[other].name} está na frente</div></div>`;
+          html += `<div class="winner-banner animate-in"><div class="title">💪 Continue firme!</div><div style="font-size:0.9rem;color:var(--text-muted);margin-top:4px">${CREDENTIALS[other].name} está na frente</div></div>`;
         }
       }
 
@@ -1259,13 +1577,13 @@
             <div class="progress-fill" style="width:${(writtenCount / MAX_DESIRES) * 100}%"></div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
-            <div style="background:#f0fdf4;border-radius:12px;padding:12px;text-align:center">
-              <div style="font-size:1.4rem;font-weight:800;color:#059669">${completedCount}</div>
-              <div style="font-size:0.75rem;color:#065f46">Cumpridos</div>
+            <div style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);border-radius:12px;padding:12px;text-align:center">
+              <div style="font-family:Orbitron,sans-serif;font-size:1.4rem;font-weight:800;color:#34d399">${completedCount}</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">Cumpridos</div>
             </div>
-            <div style="background:#fef2f2;border-radius:12px;padding:12px;text-align:center">
-              <div style="font-size:1.4rem;font-weight:800;color:#dc2626">${failedCount}</div>
-              <div style="font-size:0.75rem;color:#991b1b">Não cumpridos</div>
+            <div style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.25);border-radius:12px;padding:12px;text-align:center">
+              <div style="font-family:Orbitron,sans-serif;font-size:1.4rem;font-weight:800;color:#f43f5e">${failedCount}</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">Não cumpridos</div>
             </div>
           </div>
           <div style="margin-top:12px;font-size:0.85rem;color:var(--text-muted);text-align:center">
@@ -1276,14 +1594,14 @@
 
       // Quick tip
       html += `
-        <div class="card animate-in" style="animation-delay:0.1s;background:#f5f3ff">
-          <div style="font-size:0.9rem;line-height:1.5;color:var(--text-muted)">
-            <strong style="color:var(--primary)">Como funciona:</strong><br>
+        <div class="card animate-in" style="animation-delay:0.1s;background:rgba(168,85,247,0.06)">
+          <div style="font-size:0.9rem;line-height:1.55;color:var(--text-muted)">
+            <strong style="color:var(--accent);font-family:Orbitron,sans-serif;letter-spacing:1px">COMO JOGAR</strong><br>
             1. Escreva desejos para o outro cumprir<br>
             2. Revele um desejo aleatório da lista do outro<br>
-            3. Você tem <strong>6 dias</strong> para cumprir<br>
+            3. Você tem <strong style="color:var(--warning)">6 dias</strong> para cumprir<br>
             4. Marque como cumprido → o outro confirma<br>
-            5. +10 pts se cumprir | −5 pts se perder o prazo
+            5. <span style="color:var(--success)">+10 pts</span> se cumprir | <span style="color:var(--danger)">−5 pts</span> se perder o prazo
           </div>
         </div>
       `;
@@ -1381,8 +1699,8 @@
     function renderResetSection() {
       const req = game.resetRequest;
       let html = `
-        <div class="card" style="margin-top:20px;border:2px dashed #fca5a5;background:#fef2f2">
-          <div class="card-title" style="color:#991b1b">🔄 Resetar jogo</div>
+        <div class="card" style="margin-top:20px;border:1px dashed rgba(244,63,94,0.4);background:rgba(244,63,94,0.06)">
+          <div class="card-title" style="color:var(--danger)">🔄 RESETAR JOGO</div>
           <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:14px;line-height:1.45">
             Apaga <strong>todos</strong> os desejos, pontuações e progresso. Só acontece se <strong>os dois</strong> concordarem.
           </p>
@@ -1396,8 +1714,8 @@
         `;
       } else if (req.from === currentUser) {
         html += `
-          <div style="background:#fff7ed;border-radius:12px;padding:14px;margin-bottom:12px">
-            <div style="font-weight:700;color:#c2410c;margin-bottom:4px">Aguardando o outro...</div>
+          <div style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);border-radius:12px;padding:14px;margin-bottom:12px">
+            <div style="font-weight:700;color:var(--warning);margin-bottom:4px;font-family:Orbitron,sans-serif">Aguardando o outro...</div>
             <div style="font-size:0.85rem;color:var(--text-muted)">
               Você solicitou o reset. ${CREDENTIALS[otherUser(currentUser)].name} precisa confirmar.
             </div>
@@ -1406,8 +1724,8 @@
         `;
       } else {
         html += `
-          <div style="background:#fef3c7;border-radius:12px;padding:14px;margin-bottom:12px">
-            <div style="font-weight:700;color:#92400e;margin-bottom:4px">
+          <div style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:12px;padding:14px;margin-bottom:12px">
+            <div style="font-weight:700;color:var(--warning);margin-bottom:4px;font-family:Orbitron,sans-serif">
               ${CREDENTIALS[req.from].name} pediu para resetar o jogo
             </div>
             <div style="font-size:0.85rem;color:var(--text-muted)">
@@ -1611,6 +1929,7 @@
         });
         game = await saveGame(game);
         closeModal('modal-add');
+        playSound('confirm');
         toast('Desejo salvo! 💜', 'success');
         renderView();
       } catch (e) {
@@ -1639,6 +1958,7 @@
         desire.text = text;
         game = await saveGame(game);
         closeModal('modal-edit');
+        playSound('confirm');
         toast('Desejo atualizado! ✏️', 'success');
         renderView();
       } catch (e) {
@@ -1661,6 +1981,7 @@
       try {
         game.desires = game.desires.filter(d => d.id !== desireId);
         game = await saveGame(game);
+        playSound('delete');
         toast('Desejo excluído', 'success');
         renderView();
       } catch (e) {
@@ -1731,10 +2052,13 @@
         game.active = { tayna: null, guilherme: null };
         game.resetRequest = null;
         game = await saveGame(game);
+        playSound('reset');
         toast('Jogo resetado com sucesso! 🔄', 'success');
         updateScoreboard();
         renderView();
         switchView('home');
+        document.body.classList.add('shake');
+        setTimeout(() => document.body.classList.remove('shake'), 500);
       } catch (e) {
         toast('Erro ao resetar', 'error');
       } finally {
@@ -1766,9 +2090,13 @@
         chosen.deadline = deadline;
         game.active[currentUser] = chosen.id;
         game = await saveGame(game);
+        playSound('reveal');
         toast('Desejo revelado! Você tem 6 dias ⏳', 'success');
         updateScoreboard();
         renderView();
+        // Screen feedback
+        document.body.classList.add('shake');
+        setTimeout(() => document.body.classList.remove('shake'), 400);
       } catch (e) {
         toast('Erro ao revelar', 'error');
       } finally {
@@ -1790,6 +2118,7 @@
         desire.confirmRequestedAt = Date.now();
         // Keep active until confirmed or rejected
         game = await saveGame(game);
+        playSound('confirm');
         toast('Aguardando confirmação do outro 💌', 'success');
         renderView();
         switchView('pending');
@@ -1813,9 +2142,12 @@
         game.players[fulfiller].score = (game.players[fulfiller].score || 0) + POINTS_SUCCESS;
         game.active[fulfiller] = null;
         game = await saveGame(game);
+        playSound('success');
         toast(`Confirmado! +${POINTS_SUCCESS} pontos para ${CREDENTIALS[fulfiller].name} 🎉`, 'success');
         updateScoreboard();
         renderView();
+        document.body.classList.add('shake');
+        setTimeout(() => document.body.classList.remove('shake'), 400);
       } catch (e) {
         toast('Erro', 'error');
       } finally {
