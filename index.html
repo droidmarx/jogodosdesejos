@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Desejos" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="theme-color" content="#0a0a1a" />
+  <meta name="theme-color" content="#0a0610" />
   <meta name="description" content="Jogo de desejos para casal – Tayna & Guilherme" />
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
@@ -15,26 +15,27 @@
   <title>DESEJOS // Tayna & Guilherme</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #a855f7;
-      --primary-glow: rgba(168, 85, 247, 0.5);
-      --secondary: #ec4899;
-      --secondary-glow: rgba(236, 72, 153, 0.45);
-      --accent: #22d3ee;
-      --accent-glow: rgba(34, 211, 238, 0.4);
-      --success: #34d399;
-      --danger: #f43f5e;
+      /* Midnight Romance – casal */
+      --primary: #f472b6;
+      --primary-glow: rgba(244, 114, 182, 0.45);
+      --secondary: #c084fc;
+      --secondary-glow: rgba(192, 132, 252, 0.4);
+      --accent: #fbbf24;
+      --accent-glow: rgba(251, 191, 36, 0.35);
+      --success: #4ade80;
+      --danger: #fb7185;
       --warning: #fbbf24;
-      --bg: #07070f;
-      --bg2: #0f0f1c;
-      --card: #12121f;
-      --card-border: rgba(168, 85, 247, 0.25);
-      --text: #f1f5f9;
-      --text-muted: #94a3b8;
-      --border: rgba(148, 163, 184, 0.15);
-      --shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+      --bg: #0a0610;
+      --bg2: #140c1a;
+      --card: #16101f;
+      --card-border: rgba(244, 114, 182, 0.22);
+      --text: #fdf2f8;
+      --text-muted: #a89bb5;
+      --border: rgba(244, 114, 182, 0.12);
+      --shadow: 0 0 32px rgba(244, 114, 182, 0.12);
       --radius: 16px;
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -48,7 +49,7 @@
 
     html, body {
       height: 100%;
-      font-family: 'Rajdhani', system-ui, sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
@@ -59,8 +60,8 @@
       flex-direction: column;
       min-height: 100dvh;
       background:
-        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 85, 247, 0.18), transparent),
-        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(236, 72, 153, 0.1), transparent),
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(244, 114, 182, 0.16), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(192, 132, 252, 0.1), transparent),
         var(--bg);
     }
 
@@ -73,9 +74,9 @@
       justify-content: center;
       padding: 24px;
       background:
-        radial-gradient(ellipse 100% 80% at 50% 0%, rgba(168, 85, 247, 0.2), transparent 60%),
-        radial-gradient(ellipse 80% 50% at 20% 100%, rgba(236, 72, 153, 0.12), transparent),
-        #07070f;
+        radial-gradient(ellipse 100% 80% at 50% 0%, rgba(244, 114, 182, 0.18), transparent 60%),
+        radial-gradient(ellipse 80% 50% at 20% 100%, rgba(192, 132, 252, 0.12), transparent),
+        #0a0610;
       position: relative;
       overflow: hidden;
     }
@@ -85,8 +86,8 @@
       position: absolute;
       inset: 0;
       background: 
-        linear-gradient(90deg, transparent 49%, rgba(34, 211, 238, 0.03) 50%, transparent 51%),
-        linear-gradient(0deg, transparent 49%, rgba(168, 85, 247, 0.03) 50%, transparent 51%);
+        linear-gradient(90deg, transparent 49%, rgba(251, 191, 36, 0.04) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(244, 114, 182, 0.04) 50%, transparent 51%);
       background-size: 40px 40px;
       pointer-events: none;
       animation: gridPulse 8s ease-in-out infinite;
@@ -98,15 +99,15 @@
     }
 
     .login-card {
-      background: rgba(18, 18, 31, 0.9);
+      background: rgba(22, 16, 31, 0.92);
       border: 1px solid var(--card-border);
       border-radius: 20px;
       padding: 36px 28px;
       width: 100%;
       max-width: 380px;
       box-shadow: 
-        0 0 40px rgba(168, 85, 247, 0.2),
-        0 0 80px rgba(236, 72, 153, 0.08),
+        0 0 40px rgba(244, 114, 182, 0.18),
+        0 0 80px rgba(192, 132, 252, 0.1),
         inset 0 1px 0 rgba(255,255,255,0.05);
       position: relative;
       z-index: 1;
@@ -119,11 +120,11 @@
     }
 
     .logo h1 {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 1.85rem;
       font-weight: 800;
-      letter-spacing: 3px;
-      background: linear-gradient(135deg, #a855f7, #ec4899, #22d3ee);
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #f472b6, #c084fc, #fbbf24);
       background-size: 200% 200%;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -143,7 +144,7 @@
       color: var(--accent);
       font-size: 0.9rem;
       font-weight: 600;
-      letter-spacing: 2px;
+      letter-spacing: 0.5px;
       text-transform: uppercase;
       opacity: 0.85;
     }
@@ -184,7 +185,7 @@
       font-family: inherit;
       font-weight: 600;
       transition: border-color 0.2s, box-shadow 0.2s;
-      background: rgba(7, 7, 15, 0.7);
+      background: rgba(10, 6, 16, 0.75);
       color: var(--text);
     }
 
@@ -208,7 +209,7 @@
       padding: 15px;
       border: none;
       border-radius: 12px;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       font-size: 0.95rem;
       letter-spacing: 1px;
@@ -237,7 +238,7 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      background: linear-gradient(135deg, #db2777, #f472b6);
       color: white;
       box-shadow: 0 0 20px var(--primary-glow), 0 4px 15px rgba(0,0,0,0.3);
     }
@@ -257,7 +258,7 @@
 
     .btn-success {
       background: linear-gradient(135deg, #059669, #34d399);
-      color: #022c22;
+      color: #052e16;
       box-shadow: 0 0 20px rgba(52, 211, 153, 0.35);
     }
 
@@ -268,22 +269,22 @@
     }
 
     .btn-accent {
-      background: linear-gradient(135deg, #0891b2, #22d3ee);
-      color: #083344;
+      background: linear-gradient(135deg, #d97706, #fbbf24);
+      color: #1c1917;
       box-shadow: 0 0 20px var(--accent-glow);
       animation: pulseGlow 2s ease-in-out infinite;
     }
 
     @keyframes pulseGlow {
       0%, 100% { box-shadow: 0 0 15px var(--accent-glow); }
-      50% { box-shadow: 0 0 28px var(--accent-glow), 0 0 40px rgba(34, 211, 238, 0.2); }
+      50% { box-shadow: 0 0 28px var(--accent-glow), 0 0 40px rgba(251, 191, 36, 0.2); }
     }
 
     .btn-ghost {
       background: transparent;
       color: var(--text-muted);
       border: 1px solid var(--border);
-      font-family: 'Rajdhani', sans-serif;
+      font-family: 'Inter', sans-serif;
       letter-spacing: 0.5px;
     }
 
@@ -306,14 +307,14 @@
     }
 
     .header {
-      background: linear-gradient(180deg, rgba(18,18,31,0.98), rgba(12,12,22,0.95));
+      background: linear-gradient(180deg, rgba(22,16,31,0.98), rgba(14,10,20,0.95));
       color: white;
       padding: 14px 16px 18px;
       border-bottom: 1px solid var(--card-border);
       position: sticky;
       top: 0;
       z-index: 50;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.4), 0 0 40px rgba(168, 85, 247, 0.08);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4), 0 0 40px rgba(244, 114, 182, 0.1);
       backdrop-filter: blur(16px);
     }
 
@@ -338,7 +339,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 800;
       font-size: 1.1rem;
       border: 2px solid rgba(255,255,255,0.2);
@@ -346,7 +347,7 @@
     }
 
     .header-user strong {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 1rem;
       letter-spacing: 1px;
     }
@@ -373,7 +374,7 @@
 
     .scoreboard {
       display: flex;
-      background: rgba(7, 7, 15, 0.6);
+      background: rgba(10, 6, 16, 0.65);
       border: 1px solid var(--card-border);
       border-radius: 14px;
       padding: 12px 6px;
@@ -405,11 +406,11 @@
     }
 
     .score-value {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 1.7rem;
       font-weight: 800;
       line-height: 1.1;
-      background: linear-gradient(180deg, #fff, #a855f7);
+      background: linear-gradient(180deg, #fff, #f472b6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -449,11 +450,11 @@
       left: 0;
       right: 0;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(244,114,182,0.4), transparent);
     }
 
     .card-title {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       font-size: 0.9rem;
       letter-spacing: 1px;
@@ -473,26 +474,26 @@
       font-weight: 700;
       letter-spacing: 0.5px;
       text-transform: uppercase;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
     .badge-success { background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
     .badge-warning { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
     .badge-danger { background: rgba(244, 63, 94, 0.12); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.3); }
-    .badge-info { background: rgba(34, 211, 238, 0.12); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.3); }
-    .badge-pink { background: rgba(236, 72, 153, 0.12); color: #ec4899; border: 1px solid rgba(236, 72, 153, 0.3); }
+    .badge-info { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-pink { background: rgba(192, 132, 252, 0.12); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.3); }
 
     /* Active desire */
     .active-card {
-      background: linear-gradient(160deg, rgba(168, 85, 247, 0.12), rgba(236, 72, 153, 0.08));
-      border: 1px solid rgba(168, 85, 247, 0.45);
-      box-shadow: 0 0 30px rgba(168, 85, 247, 0.15), inset 0 0 40px rgba(168, 85, 247, 0.05);
+      background: linear-gradient(160deg, rgba(244, 114, 182, 0.12), rgba(192, 132, 252, 0.1));
+      border: 1px solid rgba(244, 114, 182, 0.4);
+      box-shadow: 0 0 30px rgba(244, 114, 182, 0.14), inset 0 0 40px rgba(244, 114, 182, 0.06);
       animation: activePulse 3s ease-in-out infinite;
     }
 
     @keyframes activePulse {
-      0%, 100% { box-shadow: 0 0 25px rgba(168, 85, 247, 0.12), inset 0 0 30px rgba(168, 85, 247, 0.04); }
-      50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.25), inset 0 0 50px rgba(168, 85, 247, 0.08); }
+      0%, 100% { box-shadow: 0 0 25px rgba(244, 114, 182, 0.12), inset 0 0 30px rgba(244, 114, 182, 0.05); }
+      50% { box-shadow: 0 0 40px rgba(244, 114, 182, 0.22), inset 0 0 50px rgba(244, 114, 182, 0.1); }
     }
 
     .active-card::before {
@@ -523,12 +524,12 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(7, 7, 15, 0.7);
+      background: rgba(10, 6, 16, 0.75);
       border: 1px solid var(--card-border);
       border-radius: 10px;
       padding: 10px 14px;
       margin-bottom: 16px;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       font-size: 0.95rem;
       color: var(--accent);
@@ -579,7 +580,7 @@
     /* Progress */
     .progress-bar {
       height: 8px;
-      background: rgba(7, 7, 15, 0.8);
+      background: rgba(10, 6, 16, 0.85);
       border-radius: 8px;
       overflow: hidden;
       margin: 8px 0 4px;
@@ -626,13 +627,13 @@
       width: 28px;
       height: 28px;
       border-radius: 8px;
-      background: rgba(168, 85, 247, 0.15);
+      background: rgba(244, 114, 182, 0.14);
       color: var(--primary);
-      border: 1px solid rgba(168, 85, 247, 0.3);
+      border: 1px solid rgba(244, 114, 182, 0.28);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 700;
       font-size: 0.75rem;
       flex-shrink: 0;
@@ -645,8 +646,8 @@
     }
 
     .btn-icon {
-      background: rgba(168, 85, 247, 0.12);
-      border: 1px solid rgba(168, 85, 247, 0.25);
+      background: rgba(244, 114, 182, 0.12);
+      border: 1px solid rgba(244, 114, 182, 0.22);
       width: 34px;
       height: 34px;
       border-radius: 8px;
@@ -690,7 +691,7 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 6px;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
     .pending-actions {
@@ -730,7 +731,7 @@
       background: none;
       border: none;
       color: var(--text-muted);
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 0.6rem;
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -758,7 +759,7 @@
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(7, 7, 15, 0.75);
+      background: rgba(10, 6, 16, 0.8);
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -775,7 +776,7 @@
     }
 
     .modal {
-      background: linear-gradient(180deg, #16162a, #0f0f1c);
+      background: linear-gradient(180deg, #1a1224, #120c18);
       border: 1px solid var(--card-border);
       border-bottom: none;
       border-radius: 24px 24px 0 0;
@@ -786,7 +787,7 @@
       overflow-y: auto;
       transform: translateY(100%);
       transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
-      box-shadow: 0 -10px 50px rgba(168, 85, 247, 0.15);
+      box-shadow: 0 -10px 50px rgba(244, 114, 182, 0.14);
     }
 
     .modal-overlay.show .modal {
@@ -802,7 +803,7 @@
     }
 
     .modal h3 {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 1.15rem;
       letter-spacing: 1px;
       margin-bottom: 6px;
@@ -831,7 +832,7 @@
       font-weight: 500;
       resize: vertical;
       margin-bottom: 16px;
-      background: rgba(7, 7, 15, 0.7);
+      background: rgba(10, 6, 16, 0.75);
       color: var(--text);
     }
 
@@ -847,7 +848,7 @@
       color: var(--text-muted);
       margin-top: -10px;
       margin-bottom: 12px;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
     /* Toast */
@@ -856,7 +857,7 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%) translateY(-120px);
-      background: linear-gradient(135deg, #1e1b4b, #12121f);
+      background: linear-gradient(135deg, #2a1528, #16101f);
       color: white;
       padding: 14px 22px;
       border-radius: 12px;
@@ -868,7 +869,7 @@
       transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
       max-width: 90%;
       text-align: center;
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       letter-spacing: 0.5px;
     }
 
@@ -892,7 +893,7 @@
     .loading-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(7, 7, 15, 0.75);
+      background: rgba(10, 6, 16, 0.8);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -911,7 +912,7 @@
     .spinner {
       width: 48px;
       height: 48px;
-      border: 3px solid rgba(168, 85, 247, 0.2);
+      border: 3px solid rgba(244, 114, 182, 0.18);
       border-top-color: var(--primary);
       border-radius: 50%;
       animation: spin 0.6s linear infinite;
@@ -966,7 +967,7 @@
     .history-meta {
       font-size: 0.75rem;
       color: var(--text-muted);
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
     }
 
     /* Section headers */
@@ -978,7 +979,7 @@
     }
 
     .section-header h2 {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: 1px;
@@ -1022,7 +1023,7 @@
     }
 
     .winner-banner .title {
-      font-family: 'Orbitron', sans-serif;
+      font-family: 'Space Grotesk', sans-serif;
       font-weight: 800;
       color: var(--warning);
       font-size: 1rem;
@@ -1489,7 +1490,7 @@
       if (game.resetRequest && game.resetRequest.from !== me) {
         html += `
           <div class="card animate-in" style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.4);margin-bottom:16px">
-            <div style="font-weight:800;color:var(--warning);margin-bottom:6px;font-family:Orbitron,sans-serif;letter-spacing:1px">⚠️ SOLICITAÇÃO DE RESET</div>
+            <div style="font-weight:800;color:var(--warning);margin-bottom:6px;font-family:Space Grotesk,sans-serif;letter-spacing:1px">⚠️ SOLICITAÇÃO DE RESET</div>
             <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:12px">
               ${CREDENTIALS[game.resetRequest.from].name} pediu para resetar o jogo.
             </p>
@@ -1585,11 +1586,11 @@
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
             <div style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.25);border-radius:12px;padding:12px;text-align:center">
-              <div style="font-family:Orbitron,sans-serif;font-size:1.4rem;font-weight:800;color:#34d399">${completedCount}</div>
+              <div style="font-family:Space Grotesk,sans-serif;font-size:1.4rem;font-weight:800;color:#34d399">${completedCount}</div>
               <div style="font-size:0.75rem;color:var(--text-muted)">Cumpridos</div>
             </div>
             <div style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.25);border-radius:12px;padding:12px;text-align:center">
-              <div style="font-family:Orbitron,sans-serif;font-size:1.4rem;font-weight:800;color:#f43f5e">${failedCount}</div>
+              <div style="font-family:Space Grotesk,sans-serif;font-size:1.4rem;font-weight:800;color:#f43f5e">${failedCount}</div>
               <div style="font-size:0.75rem;color:var(--text-muted)">Não cumpridos</div>
             </div>
           </div>
@@ -1601,9 +1602,9 @@
 
       // Quick tip
       html += `
-        <div class="card animate-in" style="animation-delay:0.1s;background:rgba(168,85,247,0.06)">
+        <div class="card animate-in" style="animation-delay:0.1s;background:rgba(244,114,182,0.07)">
           <div style="font-size:0.9rem;line-height:1.55;color:var(--text-muted)">
-            <strong style="color:var(--accent);font-family:Orbitron,sans-serif;letter-spacing:1px">COMO JOGAR</strong><br>
+            <strong style="color:var(--accent);font-family:Space Grotesk,sans-serif;letter-spacing:1px">COMO JOGAR</strong><br>
             1. Escreva desejos para o outro cumprir<br>
             2. Revele um desejo aleatório da lista do outro<br>
             3. Você tem <strong style="color:var(--warning)">6 dias</strong> para cumprir<br>
@@ -1722,7 +1723,7 @@
       } else if (req.from === currentUser) {
         html += `
           <div style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.25);border-radius:12px;padding:14px;margin-bottom:12px">
-            <div style="font-weight:700;color:var(--warning);margin-bottom:4px;font-family:Orbitron,sans-serif">Aguardando o outro...</div>
+            <div style="font-weight:700;color:var(--warning);margin-bottom:4px;font-family:Space Grotesk,sans-serif">Aguardando o outro...</div>
             <div style="font-size:0.85rem;color:var(--text-muted)">
               Você solicitou o reset. ${CREDENTIALS[otherUser(currentUser)].name} precisa confirmar.
             </div>
@@ -1732,7 +1733,7 @@
       } else {
         html += `
           <div style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.3);border-radius:12px;padding:14px;margin-bottom:12px">
-            <div style="font-weight:700;color:var(--warning);margin-bottom:4px;font-family:Orbitron,sans-serif">
+            <div style="font-weight:700;color:var(--warning);margin-bottom:4px;font-family:Space Grotesk,sans-serif">
               ${CREDENTIALS[req.from].name} pediu para resetar o jogo
             </div>
             <div style="font-size:0.85rem;color:var(--text-muted)">
