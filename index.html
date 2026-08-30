@@ -2,7 +2,168 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>LOADING_PLACEHOLDER_WILL_FIX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Desejos" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0a0610" />
+  <meta name="description" content="Jogo de desejos para casal – Tayna & Guilherme" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png" />
+  <link rel="apple-touch-icon" sizes="167x167" href="icon-167.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="icon-152.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="icon-120.png" />
+  <title>DESEJOS // Tayna & Guilherme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>Use crypto-notify.js - full index pending</body>
+<body>
+  <!-- LOGIN -->
+  <div id="login-screen">
+    <div class="login-card animate-in">
+      <div class="logo">
+        <div class="hearts"><span class="icon-svg filled"><svg><use href="#i-heart"/></svg></span></div>
+        <h1>DESEJOS</h1>
+        <p>Tayna // Guilherme</p>
+      </div>
+      <div class="form-group">
+        <label for="username">Login</label>
+        <input type="text" id="username" placeholder="Seu nome" autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" placeholder="Sua senha" autocomplete="current-password" />
+      </div>
+      <button class="btn btn-primary" id="btn-login" onclick="doLogin()">
+        Entrar no jogo
+      </button>
+      <div class="error-msg" id="login-error"></div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="app">
+    <header class="header">
+      <div class="header-top">
+        <div class="header-user">
+          <div class="avatar" id="user-avatar">T</div>
+          <div>
+            <strong id="user-name">Tayna</strong>
+            <div style="font-size:0.75rem;opacity:0.85" id="user-role">Jogador</div>
+          </div>
+        </div>
+        <button class="logout-btn" onclick="logout()" title="Sair"><span class="icon-svg"><svg><use href="#i-logout"/></svg></span></button>
+      </div>
+      <div class="scoreboard">
+        <div class="score-item">
+          <div class="score-label" id="score-label-me">Você</div>
+          <div class="score-value" id="score-me">0</div>
+          <div class="score-diff" id="score-diff-me"></div>
+        </div>
+        <div class="score-item">
+          <div class="score-label" id="score-label-other">Parceiro(a)</div>
+          <div class="score-value" id="score-other">0</div>
+          <div class="score-diff" id="score-diff-other"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content" id="main-content">
+      <!-- Views will be injected here -->
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-view="home" onclick="switchView('home')">
+        <span class="icon-svg"><svg><use href="#i-home"/></svg></span>
+        Início
+      </button>
+      <button class="nav-item" data-view="write" onclick="switchView('write')">
+        <span class="icon-svg"><svg><use href="#i-pen"/></svg></span>
+        Escrever
+      </button>
+      <button class="nav-item" data-view="pending" onclick="switchView('pending')">
+        <span class="icon-svg"><svg><use href="#i-bell"/></svg></span>
+        Confirmar
+      </button>
+      <button class="nav-item" data-view="history" onclick="switchView('history')">
+        <span class="icon-svg"><svg><use href="#i-list"/></svg></span>
+        Histórico
+      </button>
+    </nav>
+  </div>
+
+  <!-- Modal Add Desire -->
+  <div class="modal-overlay" id="modal-add">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <h3>Novo Desejo</h3>
+      <p class="sub">Escreva um desejo que o outro deverá cumprir</p>
+      <textarea id="new-desire-text" placeholder="Ex: Me leve para jantar em um lugar especial..." maxlength="300"></textarea>
+      <div class="char-count"><span id="char-count">0</span>/300</div>
+      <div class="flex-gap">
+        <button class="btn btn-ghost" onclick="closeModal('modal-add')">Cancelar</button>
+        <button class="btn btn-primary" id="btn-save-desire" onclick="saveDesire()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Edit Desire -->
+  <div class="modal-overlay" id="modal-edit">
+    <div class="modal">
+      <div class="modal-handle"></div>
+      <h3>Editar Desejo</h3>
+      <p class="sub">Só é possível editar desejos ainda não revelados</p>
+      <textarea id="edit-desire-text" placeholder="Texto do desejo..." maxlength="300"></textarea>
+      <div class="char-count"><span id="edit-char-count">0</span>/300</div>
+      <input type="hidden" id="edit-desire-id" />
+      <div class="flex-gap">
+        <button class="btn btn-ghost" onclick="closeModal('modal-edit')">Cancelar</button>
+        <button class="btn btn-primary" onclick="updateDesire()">Salvar alterações</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <!-- Loading -->
+  <div class="loading-overlay" id="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <script src="crypto-notify.js"></script>
+  <script src="app.js"></script>
+
+  <!-- iOS-style icon sprite -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1v-9.5z"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10 21a2 2 0 0 0 4 0"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-dice" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.2" fill="currentColor" stroke="none"/><circle cx="16" cy="8" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/><circle cx="8" cy="16" r="1.2" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="1.2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.5 6.5L20 11l-6.5 1.5L12 19l-1.5-6.5L4 11l6.5-1.5L12 3z"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6z"/><path d="M14 3v6h6M8 13h8M8 17h6"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v4M12 17h.01"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 6H4a2 2 0 0 0 2 4h1M17 6h3a2 2 0 0 1-2 4h-1"/></symbol>
+    <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13l3.5 7v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6L5.5 5z"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  </svg>
+
+</body>
 </html>
