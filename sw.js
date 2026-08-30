@@ -1,8 +1,15 @@
-const CACHE_NAME = 'desejos-v2';
+const CACHE_NAME = 'desejos-v4';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/styles.css',
+  '/crypto-notify.js',
+  '/app-data-0.js',
+  '/app-data-1.js',
+  '/app-data-2.js',
+  '/app-data-3.js',
+  '/app-boot.js',
   '/icon-192.png',
   '/icon-512.png',
   '/favicon-32.png'
@@ -23,12 +30,10 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Network-first for API, cache-first for assets
   if (event.request.url.includes('mockapi.io')) {
     event.respondWith(fetch(event.request).catch(() => caches.match(event.request)));
     return;
   }
-
   event.respondWith(
     caches.match(event.request).then((cached) => {
       const fetched = fetch(event.request).then((response) => {
@@ -43,7 +48,6 @@ self.addEventListener('fetch', (event) => {
   );
 });
 
-// Notificações: clique abre o app
 self.addEventListener('notificationclick', (event) => {
   event.notification.close();
   event.waitUntil(
@@ -51,9 +55,6 @@ self.addEventListener('notificationclick', (event) => {
       for (const client of clientList) {
         if ('focus' in client) {
           client.focus();
-          if (client.url && 'navigate' in client) {
-            try { client.navigate('/'); } catch (e) {}
-          }
           return;
         }
       }
@@ -62,7 +63,6 @@ self.addEventListener('notificationclick', (event) => {
   );
 });
 
-// Permite o app pedir para mostrar notificação via postMessage
 self.addEventListener('message', (event) => {
   if (!event.data || event.data.type !== 'SHOW_NOTIFICATION') return;
   const { title, options } = event.data;
